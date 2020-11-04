@@ -1,3 +1,5 @@
+// this was a solution to the Application Problem
+
 let startTimes = [5,7,0,10,4];
 speeds = [1.4, 1.5, .5, 2, 1.2];
 distances = [0,0,0,0,0];
