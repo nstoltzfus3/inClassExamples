@@ -32,8 +32,8 @@ Using an ACSII (https://www.ascii-code.com/) chart, find the range of values for
 ```java
 // print the valid characters for input
 AsciiChars.printNumbers();
-AsciiChars.printUpperCaseLetters();
-AsciiChars.printLowerCaseLetters();
+AsciiChars.printLowerCase();
+AsciiChars.printUpperCase();
 ```
 
 Next, set up a simple interaction with the user.  After printing the valid characters, ask the question `Please enter your name: `.  When the user inputs their name, simply respond to them by echoing back `Hello Tom` (if they input Tom of course). See more detailed instructions below on reading input from the keyboard.
