@@ -28,7 +28,7 @@ public class AsciiChars
   }
 }
 ```
-Using an ACSII (https://www.ascii-code.com/) chart, find the range of values for each of the different characters sets above - numbers, lower case letters, and upper case letters.  Then using a `for` loop, print the valid values in each set. Note that since these are `static` methods they can be called from within the `main()` method as follows:
+Using an ACSII (https://www.ascii-code.com/) chart, find the range of values for each of the different characters sets above - numbers, lower case letters, and upper case letters.  Then using a `for` loop, print the valid values in each set (use `Character.toString ((char) i);` to convert from number to ascii character). Note that since these are `static` methods they can be called from within the `main()` method as follows:
 ```java
 // print the valid characters for input
 AsciiChars.printNumbers();
