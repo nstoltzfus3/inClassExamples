@@ -28,12 +28,12 @@ public class AsciiChars
   }
 }
 ```
-Using an ACSII chart, find the range of values for each of the different characters sets above - numbers, lower case letters, and upper case letters.  Then using a `for` loop, print the valid values in each set. Note that since these are `static` methods they can be called from within the `main()` method as follows:
+Using an ACSII (https://www.ascii-code.com/) chart, find the range of values for each of the different characters sets above - numbers, lower case letters, and upper case letters.  Then using a `for` loop, print the valid values in each set (use `Character.toString ((char) num);` to convert from number to ascii character). Note that since these are `static` methods they can be called from within the `main()` method as follows:
 ```java
 // print the valid characters for input
 AsciiChars.printNumbers();
-AsciiChars.printUpperCaseLetters();
-AsciiChars.printLowerCaseLetters();
+AsciiChars.printLowerCase();
+AsciiChars.printUpperCase();
 ```
 
 Next, set up a simple interaction with the user.  After printing the valid characters, ask the question `Please enter your name: `.  When the user inputs their name, simply respond to them by echoing back `Hello Tom` (if they input Tom of course). See more detailed instructions below on reading input from the keyboard.
