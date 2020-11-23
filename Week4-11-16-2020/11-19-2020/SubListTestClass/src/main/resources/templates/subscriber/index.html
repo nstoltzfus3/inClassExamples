@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Subscriber List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="css/style.css">
+    <link >
+  </head>
+  <body>
+    <h1>Welcome to Our Awesome Site!</h1>
+    <h3>Subscribe to our List. Sign-up below!</h3>
+    
+    <img src="images/asdf.jpeg">
+    
+	<p>Please use the form below to sign up as a subscriber:</p>
+	 <form action="#" th:action="@{/}" th:object="${subscriber}" method="post">
+	    <table>
+		<tr>
+	            <td>First Name:</td>
+		    <td><input type="text" th:field="*{firstName}" /></td>
+		</tr>
+		<tr>
+		    <td>Last Name:</td>
+		    <td><input type="text" th:field="*{lastName}" /></td>
+		</tr>
+		<tr>
+	    	    <td>Username:</td>
+		    <td><input type="text" th:field="*{userName}" /></td>
+		</tr>
+		<tr>
+		    <td><button type="submit">Submit Your Name</button></td>
+		</tr>
+	    </table>
+	</form>
+    
+    
+  </body>
+</html>
