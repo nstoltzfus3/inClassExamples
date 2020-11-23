@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Blog Site</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+  <body>
+    <h3>Blog Post Form</h3>
+    <p>Thank you for your submission!</p>
+    <h4>Blog Post:</h4>
+    <p th:text="${title}" />
+    <p th:text="${author}" />
+    <p th:text="${blogEntry}" />
+  </body>
+</html>
