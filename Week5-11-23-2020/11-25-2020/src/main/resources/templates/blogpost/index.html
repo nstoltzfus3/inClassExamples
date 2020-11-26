@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Subscriber List</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link href="../../webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="../../css/standard.css" rel="stylesheet">
+
+</head>
+
+<body>
+	<script>console.log("testing")</script>
+	<div th:replace="fragments/navbar :: navbar"></div>
+
+	<div class="container">
+		<h1>Welcome to Our Blog Post Site!</h1>
+
+		<div class="row">
+			<div th:each="blog:${posts}">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h2 th:text="${blog.title}"></h2>
+						</div>
+						<div class="panel-body">
+							<strong><p th:text="${blog.author}" /></strong>
+							<p th:text="${blog.blogEntry}" />
+						</div>
+						<div class="panel-footer">
+							<script>console.log("Testing2")</script>
+							<!-- Link to Update -->
+							<!-- Link to Show  -->
+							<div class="card-footer">
+								<a href="#" th:href="@{blogposts/{id}(id=${blog.id})}">
+									<button class="btn btn-light">Edit Post</button>
+								</a> <a href="#" th:href="@{blogposts/delete/{id}(id=${blog.id})}">
+									<button class="btn btn-danger" type="submit">Delete
+										Post</button>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<script th:src="@{/webjars/jquery/1.9.1/jquery.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
