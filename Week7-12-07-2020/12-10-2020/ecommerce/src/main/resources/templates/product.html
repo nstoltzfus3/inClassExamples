@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragments/header"></head>
+<body>
+	<div th:replace="fragments/navbar"></div>
+
+	<div class="container">
+		<div class="card mb-3 large-product-card">
+			<div class="row no-gutters">
+				<div class="col-md-6">
+					<img th:alt="${product.name}" th:src="@{${product.image}}"
+						class="card-img" style="max-height: 100%; object-fit: cover;" />
+				</div>
+				<div class="col-md-4">
+					<div class="card-body">
+						<div class="card-title">
+							<h4 th:text="${product.name}" style="margin-bottom: 0;"></h4>
+							<small th:text="${product.getBrand()}"></small>
+						</div>
+						<h5 class="card-text"
+							th:text="${#numbers.formatCurrency(product.price)}"></h5>
+						<p class="card-text" th:text="${product.description}"></p>
+						<form th:action="@{/cart}" th:object="${product}" method="post">
+							<input type="hidden"  th:field="*{id}"/>
+							<button type="submit" class="btn btn-primary">Add to
+								Cart</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="fragments/footer"></footer>
+</body>
+</html>
+

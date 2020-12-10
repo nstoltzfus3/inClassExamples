@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragments/header"></head>
+<body>
+	<div th:replace="fragments/navbar"></div>
+
+	<main role="main">
+		<!-- Main jumbotron for a primary marketing message or call to action -->
+		<div class="jumbotron">
+			<div class="container">
+				<h1 class="display-3">Nicks Nifty Nickers</h1>
+				<p>This is a small e-commerce application that allows the user
+					to purchase some of a few products that are offered here.</p>
+				<p>
+					<a class="btn btn-primary btn-lg" href="/about" role="button">Learn
+						more &raquo;</a>
+				</p>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<!--Fill this part in-->
+				<div th:each="product:${products}">
+					<div class="card" style="width: 18rem;">
+						<img th:src="${product.image}" class="card-img-top" alt="...">
+						<div class="card-body">
+							<h5 class="card-title" th:text="${product.name}"></h5>
+							<p class="card-text" th:text="${product.description}"></p>
+							<a th:href="@{/product/} + ${product.id}" class="btn btn-primary">Read</a>
+						</div>
+					</div>
+				</div> 
+
+
+			</div>
+		</div>
+	</main>
+
+	<footer th:replace="fragments/footer"></footer>
+</body>
+</html>
+

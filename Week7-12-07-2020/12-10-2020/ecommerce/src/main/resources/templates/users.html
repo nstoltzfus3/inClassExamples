@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+
+<title id="title">Users</title>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+<link rel="stylesheet" href="/custom.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/custom.js"></script>
+</head>
+<body>
+	<div th:replace="fragments/navbar"></div>
+
+	<div class="container-fluid">
+		<div class="container">
+			<h2>Users</h2>
+
+			<ul class="nav nav-tabs">
+				<li role="presentation"
+					th:classappend="${filter == 'all' ? 'active' : '' }"><a
+					href="/users">All</a></li>
+				<li role="presentation"
+					th:classappend="${filter == 'followers' ? 'active' : ''}"><a
+					href="/users?filter=followers">Followers</a></li>
+				<li role="presentation"
+					th:classappend="${filter == 'following' ? 'active' : '' }"><a
+					href="/users?filter=following">Following</a></li>
+			</ul>
+			<br />
+
+			<div class="list-group" th:each="user:${users}">
+				<a th:href="@{/users/} + ${user.username}"
+					class="list-group-item list-group-item-action">
+					<div class="row">
+						<div class="col col-sm-6">
+							<h5 class="mb-1" style="color: #00aced">
+								<i class="fab fa-twitter"></i> @<span th:text="${user.username}"></span>
+							</h5>
+							<h5 class="mb-1">
+								<span th:text="${user.firstName}"></span> <span
+									th:text="${user.lastName}"></span> <span
+									th:if="${!followingStatus.containsKey(user.username)}">(Me)</span>
+							</h5>
+							</h5>
+						</div>
+						<div class="col col-sm-2 col-sm-offset-4 text-right">
+							<h5 class="mb-1">
+								<span th:text="${tweetCounts.get(user.username)}"></span> tweets
+							</h5>
+
+							<form th:action="@{/follow/} + ${user.username}"
+								th:if="${followingStatus.containsKey(user.username) 
+				&& !followingStatus.get(user.username)}"
+								method="post">
+
+								<button style="float: right" type="Submit"
+									class="btn btn-md btn-success">Follow</button>
+
+							</form>
+
+							<form th:action="@{/unfollow/} + ${user.username}"
+								th:if="${followingStatus.containsKey(user.username) 
+				&& followingStatus.get(user.username)}"
+								method="post">
+
+								<button style="float: right" type="Submit"
+									class="btn btn-md btn-primary unfollow_btn">Following</button>
+
+							</form>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div th:if="${#lists.isEmpty(users) and filter == 'followers'}">
+				<center>
+					<h3>You don't have any followers</h3>
+				</center>
+			</div>
+			<div th:if="${#lists.isEmpty(users) and filter == 'following'}">
+				<center>
+					<h3>You're not following anyone</h3>
+				</center>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragments/header"></head>
+<body>
+	<div th:replace="fragments/navbar"></div>
+
+	<!--/*@thymesVar id="cart" type="java.util.Map<com.example.demo.model.Product, java.lang.Integer>"*/-->
+	<main role="main">
+		<div class="container">
+			<div class="row">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Image</th>
+							<th>Item</th>
+							<th>Amount</th>
+							<th>Price</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="item : ${cart}" th:with="product=${item.key}">
+							<td style="width: 10%; padding-left: 0"><img
+								th:src="${product.image}" style="width: 100%; max-height: 80px" /></td>
+							<td th:text="${product.name}"></td>
+							
+							<td th:if="${list.add(product.price * item.value)}"
+								th:text="${#numbers.formatCurrency(product.price * item.value)}"></td>
+							<td>
+
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td></td>
+							<td>Total</td>
+							<td></td>
+							<td th:text="${#numbers.formatCurrency(#aggregates.sum(list))}"></td>
+							<td></td>
+						</tr>
+						
+					</tfoot>
+					
+				</table>
+				<form action='/charge' method='POST' id='checkout-form'>
+					    <input type='hidden' th:value='${amount}' name='amount' />
+					    <label>Price:<span th:text="${#numbers.formatCurrency(#aggregates.sum(list))}" ></span></label>
+					    <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
+					    <script
+					       src='https://checkout.stripe.com/checkout.js' 
+					       class='stripe-button'
+					       th:attr='data-key=${stripePublicKey}, 
+					         data-amount=${#aggregates.sum(list)}, 
+					         data-currency=${currency}'
+					       data-name='Baeldung'
+					       data-description='Spring course checkout'
+					       data-image
+					         ='https://www.baeldung.com/wp-content/themes/baeldung/favicon/android-chrome-192x192.png'
+					       data-locale='auto'
+					       data-zip-code='false'>
+					   </script>
+					</form>
+
+				<div th:if="${cart.size() == 0}">Nothing in your cart yet.</div>
+			</div>
+		</div>
+	</main>
+
+	<div th:replace="fragments/footer"></div>
+</body>
+</html>
+

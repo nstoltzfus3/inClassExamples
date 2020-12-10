@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+<title>Log in</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+<link rel="stylesheet" href="/custom.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/custom.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<div th:replace="fragments/navbar"></div>
+		<!-- nav bar -->
+		
+		<h2>
+			Profile for <span th:text="${user.firstName}"></span> <span
+				th:text="${user.lastName}"></span> - <span style="color: #00aced">
+				@<span th:text="${user.username}"></span>
+			</span>
+		</h2>
+		<!-- add more code here -->
+		<h5>
+			Joined <span
+				th:text="${#dates.format(user.createdAt, 'MMMM dd, yyyy')}"></span>
+		</h5>
+		<div th:if="${not #lists.isEmpty(tweetList)}">
+			<h3>Tweets</h3>
+
+			<div class="list-group" th:each="tweet:${tweetList}">
+				<div class="list-group-item list-group-item-action">
+					<div class="d-flex w-100 justify-content-between">
+						<h5>
+							@<span th:text="${tweet.user.username}"></span> 
+							<small th:text="${tweet.date}"></small>
+
+						</h5>
+					</div>
+					<p class="mb-1" th:utext="${tweet.message}"></p>
+				</div>
+			</div>
+
+		</div>
+		<p th:text="${#lists.isEmpty(tweetList)}"> </p> 
+		
+		<div th:if="${#lists.isEmpty(tweetList)}">
+			<h3>No Recent Tweets</h3>
+		</div>
+		
+		<form th:action="@{/follow/} + ${user.username}" th:if="${!following}"
+			method="post">
+			<button style="float: right" type="Submit"
+				class="btn btn-lg btn-success">Follow</button>
+		</form>
+		<form th:action="@{/unfollow/} + ${user.username}"
+			th:if="${following}" method="post">
+			<button style="float: right" type="Submit"
+				class="btn btn-lg btn-primary unfollow_btn">Following</button>
+		</form>
+
+	</div>
+
+</body>
+</html>
